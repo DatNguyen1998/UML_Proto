@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package core;
+
+option go_package = "github.com/DatNguyen1998/UML_Proto/gen/go/core/catalog;catalog";
+
+service CatalogProductService {
+    rpc GetList(GetListRequest) returns (GetListResponse);
+    rpc GetById(GetByIdRequest) returns (GetByIdResponse);
+}
+
+message GetListRequest {
+    bool is_active = 1; // Optional filter to get only active products
+}
+
+message GetListResponse {
+    repeated ProductDetail products = 1;
+}
+
+message GetByIdRequest {
+    string id = 1;
+}
+
+message GetByIdResponse {
+    ProductDetail product = 1;
+}
+
+message ProductDetail {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    bool active = 4;
+    string created_at = 5; // ISO 8601 format
+    string updated_at = 6; // ISO 8601 format
+}
